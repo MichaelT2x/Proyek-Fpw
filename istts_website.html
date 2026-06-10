@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iSTTS – Institut Sains dan Teknologi Terpadu Surabaya</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0A1628;
+    --navy-mid: #132040;
+    --blue: #1A5EAD;
+    --blue-light: #2272D0;
+    --sky: #4A9FDF;
+    --sky-pale: #E8F3FB;
+    --gold: #D4960A;
+    --gold-light: #F5B921;
+    --white: #FFFFFF;
+    --off-white: #F8F9FB;
+    --gray-100: #EEF0F4;
+    --gray-200: #D4D8E2;
+    --gray-500: #8892A4;
+    --gray-700: #4A5568;
+    --text: #1A202C;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--white);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 4rem;
+    height: 68px;
+    background: rgba(10, 22, 40, 0.94);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: all .3s;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none;
+  }
+  .nav-logo-mark {
+    width: 38px; height: 38px;
+    background: linear-gradient(135deg, var(--blue-light), var(--sky));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 700; font-size: 15px; color: white;
+    letter-spacing: -0.5px;
+  }
+  .nav-logo-text { font-family: var(--font-display); font-weight: 600; font-size: 15px; color: white; line-height: 1.2; }
+  .nav-logo-sub { font-size: 10px; color: rgba(255,255,255,0.5); font-weight: 400; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.7); font-size: 14px; font-weight: 500;
+    text-decoration: none; transition: color .2s;
+  }
+  .nav-links a:hover { color: white; }
+  .nav-cta {
+    background: var(--blue-light); color: white;
+    border: none; padding: 9px 22px; border-radius: 8px;
+    font-family: var(--font-body); font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: background .2s;
+    text-decoration: none;
+  }
+  .nav-cta:hover { background: var(--sky); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background: var(--navy);
+    position: relative; overflow: hidden;
+    display: flex; align-items: center;
+    padding-top: 68px;
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(42,114,208,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(42,114,208,0.08) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-glow {
+    position: absolute; top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(34,114,208,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-glow2 {
+    position: absolute; bottom: -100px; left: 10%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(212,150,10,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 2;
+    max-width: 1200px; margin: 0 auto; padding: 0 4rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(34,114,208,0.15); border: 1px solid rgba(74,159,223,0.3);
+    color: var(--sky); font-size: 12px; font-weight: 600; letter-spacing: 0.5px;
+    padding: 6px 14px; border-radius: 20px; margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    animation: fadeUp .8s ease both;
+  }
+  .hero-badge::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--sky);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.3)} }
+
+  .hero-h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.6rem, 5vw, 3.8rem);
+    font-weight: 700; line-height: 1.1;
+    color: white; margin-bottom: 1.2rem;
+    animation: fadeUp .8s .15s ease both;
+  }
+  .hero-h1 span { color: var(--sky); }
+  .hero-desc {
+    color: rgba(255,255,255,0.6); font-size: 1.05rem; line-height: 1.75;
+    margin-bottom: 2rem;
+    animation: fadeUp .8s .3s ease both;
+  }
+  .hero-actions {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeUp .8s .45s ease both;
+  }
+  .btn-primary {
+    background: var(--blue-light); color: white; border: none;
+    padding: 14px 28px; border-radius: 10px;
+    font-family: var(--font-body); font-size: 15px; font-weight: 600;
+    cursor: pointer; transition: all .2s; text-decoration: none;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--sky); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent; color: white;
+    border: 1.5px solid rgba(255,255,255,0.25);
+    padding: 14px 28px; border-radius: 10px;
+    font-family: var(--font-body); font-size: 15px; font-weight: 600;
+    cursor: pointer; transition: all .2s; text-decoration: none;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.06); }
+
+  .hero-stats {
+    display: flex; gap: 2rem; margin-top: 3rem;
+    animation: fadeUp .8s .6s ease both;
+  }
+  .hero-stat { border-left: 2px solid var(--blue-light); padding-left: 1rem; }
+  .hero-stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: white; line-height: 1; }
+  .hero-stat-label { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 4px; }
+
+  /* Visual card right side */
+  .hero-visual {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    animation: fadeUp .8s .3s ease both;
+  }
+  .hero-card {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 16px; padding: 1.5rem;
+    transition: transform .3s, border-color .3s;
+  }
+  .hero-card:hover { transform: translateY(-4px); border-color: rgba(74,159,223,0.35); }
+  .hero-card.tall { grid-row: span 2; }
+  .hero-card-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; margin-bottom: 1rem;
+  }
+  .icon-blue { background: rgba(34,114,208,0.2); }
+  .icon-gold { background: rgba(212,150,10,0.2); }
+  .icon-teal { background: rgba(32,178,170,0.2); }
+  .icon-purple { background: rgba(147,112,219,0.2); }
+  .hero-card h4 { color: white; font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+  .hero-card p { color: rgba(255,255,255,0.45); font-size: 12px; line-height: 1.5; }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+  /* ── SECTIONS ── */
+  section { padding: 100px 0; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 4rem; }
+  .section-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    color: var(--blue); text-transform: uppercase; margin-bottom: .75rem;
+  }
+  .section-title {
+    font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 700; color: var(--navy); line-height: 1.2; margin-bottom: 1rem;
+  }
+  .section-sub { font-size: 1rem; color: var(--gray-500); line-height: 1.7; max-width: 560px; }
+
+  .section-header { margin-bottom: 3.5rem; }
+  .section-header.center { text-align: center; }
+  .section-header.center .section-sub { margin: 0 auto; }
+
+  /* ── ABOUT ── */
+  #about { background: var(--off-white); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .about-image-block { position: relative; }
+  .about-img-main {
+    width: 100%; border-radius: 20px; overflow: hidden;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+    aspect-ratio: 4/3;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .about-img-inner { text-align: center; color: white; padding: 2rem; }
+  .about-img-inner .big-year {
+    font-family: var(--font-display); font-size: 5rem; font-weight: 800;
+    color: rgba(255,255,255,0.12); line-height: 1; display: block;
+  }
+  .about-img-inner .est-text {
+    font-size: 1.1rem; font-weight: 600; color: white;
+    margin-bottom: .5rem; display: block;
+  }
+  .about-img-inner p { font-size: .875rem; color: rgba(255,255,255,0.6); }
+  .about-float {
+    position: absolute; bottom: -20px; right: -20px;
+    background: var(--gold); color: white;
+    border-radius: 14px; padding: 1rem 1.2rem;
+    font-family: var(--font-display); font-weight: 700;
+    box-shadow: 0 8px 30px rgba(212,150,10,0.35);
+  }
+  .about-float .num { font-size: 2rem; display: block; line-height: 1; }
+  .about-float .lbl { font-size: 11px; font-weight: 500; opacity: .85; }
+
+  .about-values { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+  .about-value {
+    display: flex; align-items: flex-start; gap: 1rem;
+    background: white; border: 1px solid var(--gray-100);
+    border-radius: 12px; padding: 1.2rem 1.4rem;
+    transition: box-shadow .2s;
+  }
+  .about-value:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+  .about-value-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--sky-pale); display: flex; align-items: center;
+    justify-content: center; font-size: 20px; flex-shrink: 0;
+  }
+  .about-value-text h4 { font-weight: 600; font-size: 15px; margin-bottom: 4px; color: var(--navy); }
+  .about-value-text p { font-size: 13px; color: var(--gray-500); line-height: 1.5; }
+
+  /* ── PRODI (kurikulum) ── */
+  #prodi { background: white; }
+  .prodi-tabs { display: flex; gap: .5rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+  .prodi-tab {
+    background: var(--gray-100); border: none; padding: 8px 18px;
+    border-radius: 20px; font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: all .2s; color: var(--gray-700);
+  }
+  .prodi-tab.active { background: var(--navy); color: white; }
+  .prodi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .prodi-card {
+    border: 1.5px solid var(--gray-100); border-radius: 16px; padding: 1.8rem;
+    transition: all .3s; cursor: default; position: relative; overflow: hidden;
+  }
+  .prodi-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--blue-light), var(--sky));
+  }
+  .prodi-card:hover { border-color: var(--sky); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(26,94,173,0.1); }
+  .prodi-card-badge {
+    display: inline-block; font-size: 11px; font-weight: 700;
+    letter-spacing: .5px; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 6px; margin-bottom: 1rem;
+  }
+  .badge-s1 { background: #E8F0FE; color: #1A56CC; }
+  .badge-s2 { background: #FEF3E2; color: #924D0F; }
+  .badge-d3 { background: #E8F5E9; color: #1B6B35; }
+  .prodi-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: .5rem; }
+  .prodi-card p { font-size: 13px; color: var(--gray-500); line-height: 1.6; margin-bottom: 1rem; }
+  .prodi-card-meta { display: flex; gap: .75rem; flex-wrap: wrap; }
+  .prodi-tag {
+    font-size: 11px; background: var(--gray-100); color: var(--gray-700);
+    padding: 4px 10px; border-radius: 20px; font-weight: 500;
+  }
+
+  /* ── DOSEN ── */
+  #dosen { background: var(--navy); }
+  #dosen .section-title { color: white; }
+  #dosen .section-label { color: var(--sky); }
+  #dosen .section-sub { color: rgba(255,255,255,0.5); }
+  .dosen-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+  .dosen-card {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px; padding: 1.8rem; text-align: center;
+    transition: all .3s;
+  }
+  .dosen-card:hover {
+    background: rgba(255,255,255,0.09); border-color: rgba(74,159,223,0.3);
+    transform: translateY(-4px);
+  }
+  .dosen-avatar {
+    width: 72px; height: 72px; border-radius: 50%;
+    margin: 0 auto 1rem;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-weight: 700; font-size: 1.3rem;
+    color: white;
+  }
+  .dosen-card h4 { color: white; font-size: .95rem; font-weight: 600; margin-bottom: .3rem; }
+  .dosen-card .dosen-title { font-size: 12px; color: var(--sky); margin-bottom: .5rem; }
+  .dosen-card .dosen-field { font-size: 12px; color: rgba(255,255,255,0.4); }
+
+  /* ── PROJECT ── */
+  #project { background: var(--off-white); }
+  .project-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+  .project-card {
+    border-radius: 16px; overflow: hidden;
+    background: white; border: 1px solid var(--gray-100);
+    transition: all .3s;
+  }
+  .project-card:hover { box-shadow: 0 16px 50px rgba(0,0,0,0.1); transform: translateY(-4px); }
+  .project-thumb {
+    aspect-ratio: 16/9;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem;
+    position: relative;
+  }
+  .project-thumb-label {
+    position: absolute; bottom: 12px; left: 12px;
+    background: rgba(0,0,0,0.55); color: white;
+    font-size: 11px; font-weight: 600; letter-spacing: .5px;
+    padding: 4px 10px; border-radius: 6px; text-transform: uppercase;
+  }
+  .project-body { padding: 1.4rem; }
+  .project-body h3 { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: .5rem; }
+  .project-body p { font-size: 13px; color: var(--gray-500); line-height: 1.6; }
+  .project-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: .75rem; }
+  .project-tag {
+    font-size: 11px; padding: 3px 9px; border-radius: 20px;
+    background: var(--gray-100); color: var(--gray-700); font-weight: 500;
+  }
+
+  /* ── FASILITAS ── */
+  #fasilitas { background: white; }
+  .fasilitas-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+  .fasilitas-card {
+    border: 1.5px solid var(--gray-100); border-radius: 16px;
+    padding: 2rem 1.4rem; text-align: center;
+    transition: all .3s;
+  }
+  .fasilitas-card:hover { border-color: var(--sky); box-shadow: 0 8px 30px rgba(26,94,173,0.08); }
+  .fasilitas-icon {
+    width: 56px; height: 56px; border-radius: 14px;
+    background: var(--sky-pale); display: flex; align-items: center;
+    justify-content: center; font-size: 26px; margin: 0 auto 1rem;
+  }
+  .fasilitas-card h4 { font-size: .95rem; font-weight: 700; color: var(--navy); margin-bottom: .4rem; }
+  .fasilitas-card p { font-size: 12px; color: var(--gray-500); line-height: 1.5; }
+
+  /* ── ALUMNI ── */
+  #alumni { background: var(--off-white); }
+  .alumni-track-wrap { overflow: hidden; position: relative; margin-bottom: 2rem; }
+  .alumni-track-wrap::before, .alumni-track-wrap::after {
+    content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2;
+    pointer-events: none;
+  }
+  .alumni-track-wrap::before { left: 0; background: linear-gradient(to right, var(--off-white), transparent); }
+  .alumni-track-wrap::after { right: 0; background: linear-gradient(to left, var(--off-white), transparent); }
+  .alumni-track {
+    display: flex; gap: 20px;
+    animation: scrollLeft 28s linear infinite;
+    width: max-content;
+  }
+  .alumni-track:hover { animation-play-state: paused; }
+  @keyframes scrollLeft {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .alumni-card {
+    background: white; border: 1px solid var(--gray-100);
+    border-radius: 16px; padding: 1.6rem;
+    min-width: 280px; flex-shrink: 0;
+    transition: box-shadow .2s;
+  }
+  .alumni-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.07); }
+  .alumni-header { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; }
+  .alumni-avatar {
+    width: 48px; height: 48px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-weight: 700; font-size: .95rem; color: white;
+    flex-shrink: 0;
+  }
+  .alumni-header h4 { font-size: .95rem; font-weight: 700; color: var(--navy); }
+  .alumni-header .alumni-company { font-size: 12px; color: var(--blue); font-weight: 600; }
+  .alumni-quote { font-size: 13px; color: var(--gray-500); line-height: 1.6; font-style: italic; }
+  .alumni-year { font-size: 11px; color: var(--gray-200); margin-top: .75rem; font-weight: 600; letter-spacing: .5px; }
+
+  .alumni-logos {
+    display: flex; gap: 2.5rem; align-items: center; flex-wrap: wrap;
+    justify-content: center; margin-top: 3rem;
+    padding: 2rem; background: white; border-radius: 16px;
+    border: 1px solid var(--gray-100);
+  }
+  .alumni-logos p { font-size: 12px; color: var(--gray-500); letter-spacing: .5px; text-transform: uppercase; font-weight: 600; flex-basis: 100%; text-align: center; margin-bottom: .5rem; }
+  .alumni-logo-item {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: 1.1rem; color: var(--gray-500);
+    opacity: 0.55; transition: opacity .2s; cursor: default;
+  }
+  .alumni-logo-item:hover { opacity: 1; }
+
+  /* ── CONTACT / CTA ── */
+  #contact {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #0D1E3A 100%);
+    padding: 100px 0; position: relative; overflow: hidden;
+  }
+  #contact::before {
+    content: ''; position: absolute; top: -300px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(34,114,208,0.15) 0%, transparent 70%);
+  }
+  #contact .section-title { color: white; }
+  #contact .section-label { color: var(--sky); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .contact-desc { color: rgba(255,255,255,0.55); font-size: 1rem; line-height: 1.7; margin-bottom: 2rem; }
+  .contact-info { display: flex; flex-direction: column; gap: 1.2rem; }
+  .contact-item { display: flex; align-items: flex-start; gap: .75rem; }
+  .contact-item-icon { font-size: 1.2rem; margin-top: 2px; }
+  .contact-item-text p { font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 2px; }
+  .contact-item-text strong { font-size: 14px; color: white; font-weight: 500; }
+  .contact-form-card {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px; padding: 2.5rem;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 1rem; }
+  .form-group label { font-size: 13px; color: rgba(255,255,255,0.6); font-weight: 500; }
+  .form-group input, .form-group select, .form-group textarea {
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px; padding: 12px 16px; color: white;
+    font-family: var(--font-body); font-size: 14px;
+    transition: border-color .2s; outline: none;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: rgba(74,159,223,0.6);
+  }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.25); }
+  .form-group select option { background: var(--navy); }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .form-submit {
+    width: 100%; background: var(--blue-light); color: white; border: none;
+    padding: 14px; border-radius: 10px; font-family: var(--font-body);
+    font-size: 15px; font-weight: 600; cursor: pointer; transition: all .2s;
+  }
+  .form-submit:hover { background: var(--sky); transform: translateY(-1px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #060D1A; padding: 60px 0 32px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 3rem; }
+  .footer-brand p { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.7; margin-top: 1rem; }
+  .footer-col h5 { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.7); margin-bottom: 1.2rem; letter-spacing: .5px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .65rem; }
+  .footer-col ul a { font-size: 13px; color: rgba(255,255,255,0.4); text-decoration: none; transition: color .2s; }
+  .footer-col ul a:hover { color: rgba(255,255,255,0.8); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding-top: 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; color: rgba(255,255,255,0.3);
+  }
+  .footer-accred {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(212,150,10,0.15); border: 1px solid rgba(212,150,10,0.3);
+    color: var(--gold-light); font-size: 11px; font-weight: 700;
+    padding: 4px 12px; border-radius: 20px;
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(30px); transition: all .7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    .hero-inner { grid-template-columns: 1fr; padding: 0 1.5rem; gap: 3rem; }
+    .hero-visual { display: none; }
+    .container { padding: 0 1.5rem; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; }
+    .project-grid { grid-template-columns: 1fr; }
+    .fasilitas-grid { grid-template-columns: repeat(2,1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">
+    <div class="nav-logo-mark">iS</div>
+    <div>
+      <div class="nav-logo-text">iSTTS</div>
+      <div class="nav-logo-sub">Institut Sains & Teknologi Terpadu Surabaya</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">Tentang</a></li>
+    <li><a href="#prodi">Kurikulum</a></li>
+    <li><a href="#dosen">Dosen</a></li>
+    <li><a href="#project">Proyek</a></li>
+    <li><a href="#fasilitas">Fasilitas</a></li>
+    <li><a href="#alumni">Alumni</a></li>
+  </ul>
+  <a class="nav-cta" href="#contact">Daftar Sekarang</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">Academic Excellence in Technology & Design</div>
+      <h1 class="hero-h1">Bentuk Masa Depan<br>dengan <span>Sains &amp;</span><br><span>Teknologi</span></h1>
+      <p class="hero-desc">Lebih dari 45 tahun menghasilkan talenta digital unggul. Dua fakultas, sembilan program studi, dan jaringan alumni global yang kuat.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#prodi">Lihat Program Studi</a>
+        <a class="btn-outline" href="#about">Tentang ISTTS</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">45+</div>
+          <div class="hero-stat-label">Tahun Berdiri</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">9</div>
+          <div class="hero-stat-label">Program Studi</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">5000+</div>
+          <div class="hero-stat-label">Alumni</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card tall">
+        <div class="hero-card-icon icon-blue">🏛️</div>
+        <h4>Kampus Modern</h4>
+        <p>Jl. Ngagel Jaya Tengah 73–77, Surabaya</p>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-card-icon icon-teal">🌏</div>
+        <h4>Kerjasama Global</h4>
+        <p>Murdoch University, Dong Seo University</p>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-icon icon-purple">⚗️</div>
+        <h4>Lab Lengkap</h4>
+        <p>12+ laboratorium canggih</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid reveal">
+      <div class="about-image-block">
+        <div class="about-img-main">
+          <div class="about-img-inner">
+            <span class="big-year">1979</span>
+            <span class="est-text">Didirikan sejak 1 Maret 1979</span>
+            <p>Berawal dari ITES, kini menjadi iSTTS — pemimpin pendidikan teknologi Jawa Timur</p>
+          </div>
+        </div>
+        <div class="about-float">
+          <span class="num">8×</span>
+          <span class="lbl">Predikat PTS Terbaik</span>
+        </div>
+      </div>
+      <div>
+        <div class="section-label">Tentang Kami</div>
+        <h2 class="section-title">Perguruan Tinggi Teknologi Unggulan Jawa Timur</h2>
+        <p style="color:var(--gray-500);line-height:1.75;margin-bottom:1.5rem">
+          Institut Sains dan Teknologi Terpadu Surabaya (iSTTS) adalah perguruan tinggi swasta terkemuka yang berfokus pada <strong>Technology &amp; Design</strong>. Sejak berdiri sebagai ITES pada 1979, kami telah berkembang menjadi institusi dengan dua fakultas — Fakultas Teknik dan Fakultas Desain — yang membentuk ribuan profesional teknologi Indonesia.
+        </p>
+        <div class="about-values">
+          <div class="about-value">
+            <div class="about-value-icon">🎯</div>
+            <div class="about-value-text">
+              <h4>Visi</h4>
+              <p>Menjadi perguruan tinggi teknologi dan desain bereputasi internasional di Asia Tenggara pada 2035.</p>
+            </div>
+          </div>
+          <div class="about-value">
+            <div class="about-value-icon">🔬</div>
+            <div class="about-value-text">
+              <h4>Misi</h4>
+              <p>Menyelenggarakan pendidikan berkualitas tinggi yang mengintegrasikan sains, teknologi, dan desain berbasis inovasi.</p>
+            </div>
+          </div>
+          <div class="about-value">
+            <div class="about-value-icon">💡</div>
+            <div class="about-value-text">
+              <h4>Keunggulan</h4>
+              <p>Kurikulum berbasis proyek nyata, kolaborasi industri, dan program dual-degree internasional.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODI / KURIKULUM -->
+<section id="prodi">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Kurikulum & Program Studi</div>
+      <h2 class="section-title">Dua Fakultas, Sembilan Program Studi</h2>
+      <p class="section-sub">Kurikulum berbasis OBE (Outcome-Based Education) yang diselaraskan dengan kebutuhan industri dan perkembangan teknologi global.</p>
+    </div>
+    <div class="prodi-tabs reveal">
+      <button class="prodi-tab active" onclick="filterProdi('all',this)">Semua</button>
+      <button class="prodi-tab" onclick="filterProdi('teknik',this)">Fakultas Teknik</button>
+      <button class="prodi-tab" onclick="filterProdi('desain',this)">Fakultas Desain</button>
+    </div>
+    <div class="prodi-grid" id="prodiGrid">
+      <div class="prodi-card reveal" data-fakultas="teknik">
+        <span class="prodi-card-badge badge-s1">S1</span>
+        <h3>Teknik Informatika</h3>
+        <p>Pemrograman, kecerdasan buatan, rekayasa perangkat lunak dan sistem informasi berbasis cloud.</p>
+        <div class="prodi-card-meta">
+          <span class="prodi-tag">AI & Machine Learning</span>
+          <span class="prodi-tag">Cloud Computing</span>
+        </div>
+      </div>
+      <div class="prodi-card reveal" data-fakultas="teknik">
+        <span class="prodi-card-badge badge-s1">S1</span>
+        <h3>Teknik Elektro</h3>
+        <p>Sistem kendali, elektronika daya, IoT, dan instrumentasi industri generasi berikutnya.</p>
+        <div class="prodi-card-meta">
+          <span class="prodi-tag">IoT</span>
+          <span class="prodi-tag">Robotik</span>
+        </div>
+      </div>
+      <div class="prodi-card reveal" data-fakultas="teknik">
+        <span class="prodi-card-badge badge-s1">S1</span>
+        <h3>Sistem Informasi</h3>
+        <p>Analisis bisnis, manajemen basis data, enterprise resource planning dan business intelligence.</p>
+        <div class="prodi-card-meta">
+          <span class="prodi-tag">ERP</span>
+          <span class="prodi-tag">Data Analytics</span>
+        </div>
+      </div>
+      <div class="prodi-card reveal" data-fakultas="teknik">
+        <span class="prodi-card-badge badge-s1">S1</span>
+        <h3>Cyber Forensics & Information Security</h3>
+        <p>Dual degree dengan Murdoch University Australia. Keamanan siber, forensik digital dan etika hacking.</p>
+        <div class="prodi-card-meta">
+          <span class="prodi-tag">Dual Degree</span>
+          <span class="prodi-tag">Cybersecurity</span>
+        </div>
+      </div>
+      <div class="prodi-card reveal" data-fakultas="teknik">
+        <span class="prodi-card-badge badge-s2">S2</span>
+        <h3>Magister Teknik Informatika</h3>
+        <p>Penelitian lanjutan di bidang komputasi cerdas, big data, dan transformasi digital perusahaan.</p>
+        <div class="prodi-card-meta">
+          <span class="prodi-tag">Riset</span>
+          <span class="prodi-tag">Big Data</span>
+        </div>
+      </div>
+      <div class="prodi-card reveal" data-fakultas="teknik">
+        <span class="prodi-card-badge badge-d3">D3</span>
+        <h3>Manajemen Informatika</h3>
+        <p>Penguasaan praktis sistem informasi manajemen, pemrograman web, dan administrasi jaringan.</p>
+        <div class="prodi-card-meta">
+          <span class="prodi-tag">Web Dev</span>
+          <span class="prodi-tag">Networking</span>
+        </div>
+      </div>
+      <div class="prodi-card reveal" data-fakultas="desain">
+        <span class="prodi-card-badge badge-s1">S1</span>
+        <h3>Desain Komunikasi Visual</h3>
+        <p>Branding, UI/UX, motion graphic dan komunikasi visual di era digital yang dinamis.</p>
+        <div class="prodi-card-meta">
+          <span class="prodi-tag">UI/UX Design</span>
+          <span class="prodi-tag">Branding</span>
+        </div>
+      </div>
+      <div class="prodi-card reveal" data-fakultas="desain">
+        <span class="prodi-card-badge badge-s1">S1</span>
+        <h3>Desain Produk</h3>
+        <p>Perancangan produk inovatif, desain industri, prototyping dan rekayasa estetika yang fungsional.</p>
+        <div class="prodi-card-meta">
+          <span class="prodi-tag">Prototyping</span>
+          <span class="prodi-tag">3D Design</span>
+        </div>
+      </div>
+      <div class="prodi-card reveal" data-fakultas="desain">
+        <span class="prodi-card-badge badge-s1">S1</span>
+        <h3>Bachelor of Design</h3>
+        <p>Program kerjasama internasional dengan Dong Seo University Busan, Korea Selatan.</p>
+        <div class="prodi-card-meta">
+          <span class="prodi-tag">Dual Degree</span>
+          <span class="prodi-tag">Korea</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOSEN -->
+<section id="dosen">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Tim Pengajar</div>
+      <h2 class="section-title">Dosen Berpengalaman &amp; Kompeten</h2>
+      <p class="section-sub" style="color:rgba(255,255,255,0.5)">Tenaga pengajar kami merupakan doktor dan praktisi industri dengan rekam jejak akademik dan profesional yang kuat.</p>
+    </div>
+    <div class="dosen-grid reveal">
+      <div class="dosen-card">
+        <div class="dosen-avatar" style="background:linear-gradient(135deg,#1A5EAD,#4A9FDF)">AT</div>
+        <h4>Prof. Dr. Arya Tandy H.</h4>
+        <div class="dosen-title">Rektor iSTTS</div>
+        <div class="dosen-field">Teknik Informatika</div>
+      </div>
+      <div class="dosen-card">
+        <div class="dosen-avatar" style="background:linear-gradient(135deg,#0F6E56,#1D9E75)">SR</div>
+        <h4>Dr. Sari Rahayu, M.T.</h4>
+        <div class="dosen-title">Dekan Fakultas Teknik</div>
+        <div class="dosen-field">Sistem Cerdas & AI</div>
+      </div>
+      <div class="dosen-card">
+        <div class="dosen-avatar" style="background:linear-gradient(135deg,#853007,#D85A30)">BW</div>
+        <h4>Dr. Budi Wijaya, M.Sc.</h4>
+        <div class="dosen-title">Kaprodi Teknik Elektro</div>
+        <div class="dosen-field">IoT & Embedded Systems</div>
+      </div>
+      <div class="dosen-card">
+        <div class="dosen-avatar" style="background:linear-gradient(135deg,#534AB7,#7F77DD)">DP</div>
+        <h4>Dr. Dewi Purnama, M.Ds.</h4>
+        <div class="dosen-title">Dekan Fakultas Desain</div>
+        <div class="dosen-field">Desain Komunikasi Visual</div>
+      </div>
+      <div class="dosen-card">
+        <div class="dosen-avatar" style="background:linear-gradient(135deg,#633806,#BA7517)">HN</div>
+        <h4>Dr. Hendra Nugraha, M.T.</h4>
+        <div class="dosen-title">Kepala Pusat Riset</div>
+        <div class="dosen-field">Cybersecurity & Forensics</div>
+      </div>
+      <div class="dosen-card">
+        <div class="dosen-avatar" style="background:linear-gradient(135deg,#185FA5,#378ADD)">LS</div>
+        <h4>Dr. Lina Santoso, M.Kom.</h4>
+        <div class="dosen-title">Kaprodi Sistem Informasi</div>
+        <div class="dosen-field">Data Science & Analytics</div>
+      </div>
+      <div class="dosen-card">
+        <div class="dosen-avatar" style="background:linear-gradient(135deg,#3B6D11,#639922)">RA</div>
+        <h4>Ir. Reza Aditama, M.T.</h4>
+        <div class="dosen-title">Koordinator Lab Robotika</div>
+        <div class="dosen-field">Robotika & Otomasi</div>
+      </div>
+      <div class="dosen-card">
+        <div class="dosen-avatar" style="background:linear-gradient(135deg,#993556,#D4537E)">YK</div>
+        <h4>Dr. Yuni Kartika, M.Ds.</h4>
+        <div class="dosen-title">Kaprodi Desain Produk</div>
+        <div class="dosen-field">Industrial & Product Design</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT -->
+<section id="project">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Proyek Unggulan</div>
+      <h2 class="section-title">Inovasi Nyata dari Mahasiswa ISTTS</h2>
+      <p class="section-sub">Proyek berbasis solusi riil yang dikembangkan bersama industri, startup, dan lembaga pemerintah.</p>
+    </div>
+    <div class="project-grid">
+      <div class="project-card reveal">
+        <div class="project-thumb" style="background:linear-gradient(135deg,#0A1628,#1A5EAD)">
+          🤖
+          <span class="project-thumb-label">AI & Robotika</span>
+        </div>
+        <div class="project-body">
+          <h3>AgriBot — Robot Pertanian Cerdas</h3>
+          <p>Robot otonom berbasis AI untuk monitoring dan pemupukan tanaman secara presisi. Juara 1 Kontes Robot Nasional 2023.</p>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">OpenCV</span>
+            <span class="project-tag">ROS</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-thumb" style="background:linear-gradient(135deg,#0F6E56,#1D9E75)">
+          🔒
+          <span class="project-thumb-label">Keamanan Siber</span>
+        </div>
+        <div class="project-body">
+          <h3>SecureID — Sistem Autentikasi Biometrik</h3>
+          <p>Platform autentikasi wajah dan sidik jari berbasis deep learning untuk keamanan akses institusi pendidikan.</p>
+          <div class="project-tags">
+            <span class="project-tag">Deep Learning</span>
+            <span class="project-tag">Flutter</span>
+            <span class="project-tag">FastAPI</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-thumb" style="background:linear-gradient(135deg,#533AB7,#9D77DD)">
+          🎨
+          <span class="project-thumb-label">Desain & UI</span>
+        </div>
+        <div class="project-body">
+          <h3>CityPlan AR — Perencanaan Kota Berbasis AR</h3>
+          <p>Aplikasi augmented reality untuk visualisasi masterplan kota Surabaya, kolaborasi dengan Pemkot Surabaya.</p>
+          <div class="project-tags">
+            <span class="project-tag">Unity AR</span>
+            <span class="project-tag">Figma</span>
+            <span class="project-tag">GIS</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-thumb" style="background:linear-gradient(135deg,#BA7517,#EF9F27)">
+          ⚡
+          <span class="project-thumb-label">Energi Terbarukan</span>
+        </div>
+        <div class="project-body">
+          <h3>SmartGrid Monitor — IoT Energi Surya</h3>
+          <p>Sistem monitoring panel surya real-time berbasis IoT untuk optimasi energi terbarukan di kawasan industri.</p>
+          <div class="project-tags">
+            <span class="project-tag">Arduino</span>
+            <span class="project-tag">MQTT</span>
+            <span class="project-tag">Dashboard</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-thumb" style="background:linear-gradient(135deg,#1A5EAD,#4A9FDF)">
+          📊
+          <span class="project-thumb-label">Data Science</span>
+        </div>
+        <div class="project-body">
+          <h3>PrediksiSurabaya — Analitik Kota Pintar</h3>
+          <p>Platform big data untuk memprediksi kemacetan lalu lintas dan banjir kota Surabaya berbasis machine learning.</p>
+          <div class="project-tags">
+            <span class="project-tag">TensorFlow</span>
+            <span class="project-tag">Tableau</span>
+            <span class="project-tag">Spark</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-thumb" style="background:linear-gradient(135deg,#993556,#D4537E)">
+          🛍️
+          <span class="project-thumb-label">Desain Produk</span>
+        </div>
+        <div class="project-body">
+          <h3>BatiKraft — Kemasan Batik Ramah Lingkungan</h3>
+          <p>Desain kemasan inovatif untuk UMKM batik Jawa Timur menggunakan material daur ulang berkelanjutan.</p>
+          <div class="project-tags">
+            <span class="project-tag">Sustainable</span>
+            <span class="project-tag">Packaging</span>
+            <span class="project-tag">UMKM</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FASILITAS -->
+<section id="fasilitas">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-label">Fasilitas Kampus</div>
+      <h2 class="section-title">Infrastruktur Pendukung Inovasi</h2>
+      <p class="section-sub">Laboratorium modern, ruang kreatif, dan infrastruktur digital yang mendukung proses belajar-mengajar berkualitas tinggi.</p>
+    </div>
+    <div class="fasilitas-grid reveal">
+      <div class="fasilitas-card">
+        <div class="fasilitas-icon">🖥️</div>
+        <h4>Lab Komputasi</h4>
+        <p>200+ workstation high-performance dengan koneksi gigabit dan software industri terbaru.</p>
+      </div>
+      <div class="fasilitas-card">
+        <div class="fasilitas-icon">🤖</div>
+        <h4>Lab Robotika</h4>
+        <p>Peralatan robot industri, drone, dan sistem embedded untuk riset dan praktikum mahasiswa.</p>
+      </div>
+      <div class="fasilitas-card">
+        <div class="fasilitas-icon">🔐</div>
+        <h4>Lab Siber</h4>
+        <p>Environment terisolasi untuk simulasi serangan siber, forensik digital, dan uji penetrasi.</p>
+      </div>
+      <div class="fasilitas-card">
+        <div class="fasilitas-icon">🎨</div>
+        <h4>Studio Desain</h4>
+        <p>Studio kreatif lengkap dengan Wacom, printer 3D, plotter, dan peralatan fotografi profesional.</p>
+      </div>
+      <div class="fasilitas-card">
+        <div class="fasilitas-icon">📡</div>
+        <h4>Lab Jaringan</h4>
+        <p>Perangkat Cisco, Mikrotik, dan server rack untuk simulasi infrastruktur jaringan enterprise.</p>
+      </div>
+      <div class="fasilitas-card">
+        <div class="fasilitas-icon">📚</div>
+        <h4>Perpustakaan Digital</h4>
+        <p>Akses 50.000+ jurnal internasional, e-book, dan repository penelitian terbuka 24 jam.</p>
+      </div>
+      <div class="fasilitas-card">
+        <div class="fasilitas-icon">🏃</div>
+        <h4>Pusat Olahraga</h4>
+        <p>Fasilitas olahraga indoor, lapangan futsal, dan area kebugaran untuk keseimbangan akademik.</p>
+      </div>
+      <div class="fasilitas-card">
+        <div class="fasilitas-icon">🌐</div>
+        <h4>Startup Hub</h4>
+        <p>Inkubator bisnis untuk mahasiswa yang ingin mengembangkan ide menjadi startup teknologi nyata.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ALUMNI -->
+<section id="alumni">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-label">Alumni</div>
+      <h2 class="section-title">Lulusan yang Berdampak Nyata</h2>
+      <p class="section-sub">Alumni iSTTS tersebar di perusahaan teknologi terkemuka di Indonesia dan dunia, membuktikan kualitas pendidikan kami.</p>
+    </div>
+  </div>
+
+  <div class="alumni-track-wrap reveal">
+    <div class="alumni-track" id="alumniTrack">
+      <!-- Card set 1 -->
+      <div class="alumni-card">
+        <div class="alumni-header">
+          <div class="alumni-avatar" style="background:linear-gradient(135deg,#1A5EAD,#4A9FDF)">RH</div>
+          <div>
+            <h4>Rizky Hermawan</h4>
+            <div class="alumni-company">Software Engineer · Google</div>
+          </div>
+        </div>
+        <p class="alumni-quote">"Kurikulum berbasis proyek di iSTTS mempersiapkan saya untuk menghadapi tantangan teknis di level global."</p>
+        <div class="alumni-year">ANGKATAN 2015 · S1 Teknik Informatika</div>
+      </div>
+      <div class="alumni-card">
+        <div class="alumni-header">
+          <div class="alumni-avatar" style="background:linear-gradient(135deg,#0F6E56,#1D9E75)">AS</div>
+          <div>
+            <h4>Anisa Suryani</h4>
+            <div class="alumni-company">Lead UX Designer · Tokopedia</div>
+          </div>
+        </div>
+        <p class="alumni-quote">"Studio desain di kampus adalah tempat saya menemukan passion dan skill yang kini jadi karier."</p>
+        <div class="alumni-year">ANGKATAN 2016 · S1 DKV</div>
+      </div>
+      <div class="alumni-card">
+        <div class="alumni-header">
+          <div class="alumni-avatar" style="background:linear-gradient(135deg,#533AB7,#9D77DD)">BK</div>
+          <div>
+            <h4>Bagas Kurniawan</h4>
+            <div class="alumni-company">CTO · Startup HealthTech</div>
+          </div>
+        </div>
+        <p class="alumni-quote">"Lab IoT dan mentor industri di iSTTS memberi fondasi kuat untuk membangun startup saya."</p>
+        <div class="alumni-year">ANGKATAN 2013 · S1 Teknik Elektro</div>
+      </div>
+      <div class="alumni-card">
+        <div class="alumni-header">
+          <div class="alumni-avatar" style="background:linear-gradient(135deg,#993556,#D4537E)">NP</div>
+          <div>
+            <h4>Nadya Putri</h4>
+            <div class="alumni-company">Data Scientist · Gojek</div>
+          </div>
+        </div>
+        <p class="alumni-quote">"Pengalaman riset data selama kuliah membuka pintu ke perusahaan teknologi impian saya."</p>
+        <div class="alumni-year">ANGKATAN 2017 · S1 Sistem Informasi</div>
+      </div>
+      <div class="alumni-card">
+        <div class="alumni-header">
+          <div class="alumni-avatar" style="background:linear-gradient(135deg,#BA7517,#EF9F27)">FW</div>
+          <div>
+            <h4>Farhan Wijaya</h4>
+            <div class="alumni-company">Cybersecurity Analyst · BCA</div>
+          </div>
+        </div>
+        <p class="alumni-quote">"Program keamanan siber iSTTS sangat relevan dengan ancaman digital yang saya hadapi sehari-hari."</p>
+        <div class="alumni-year">ANGKATAN 2018 · S1 Informatika</div>
+      </div>
+      <div class="alumni-card">
+        <div class="alumni-header">
+          <div class="alumni-avatar" style="background:linear-gradient(135deg,#3B6D11,#639922)">LS</div>
+          <div>
+            <h4>Lisa Santoso</h4>
+            <div class="alumni-company">Product Designer · Traveloka</div>
+          </div>
+        </div>
+        <p class="alumni-quote">"iSTTS mengajarkan saya berpikir seperti desainer sekaligus engineer — kombinasi yang sangat berharga."</p>
+        <div class="alumni-year">ANGKATAN 2016 · S1 Desain Produk</div>
+      </div>
+      <!-- Duplicate for infinite scroll -->
+      <div class="alumni-card">
+        <div class="alumni-header">
+          <div class="alumni-avatar" style="background:linear-gradient(135deg,#1A5EAD,#4A9FDF)">RH</div>
+          <div>
+            <h4>Rizky Hermawan</h4>
+            <div class="alumni-company">Software Engineer · Google</div>
+          </div>
+        </div>
+        <p class="alumni-quote">"Kurikulum berbasis proyek di iSTTS mempersiapkan saya untuk menghadapi tantangan teknis di level global."</p>
+        <div class="alumni-year">ANGKATAN 2015 · S1 Teknik Informatika</div>
+      </div>
+      <div class="alumni-card">
+        <div class="alumni-header">
+          <div class="alumni-avatar" style="background:linear-gradient(135deg,#0F6E56,#1D9E75)">AS</div>
+          <div>
+            <h4>Anisa Suryani</h4>
+            <div class="alumni-company">Lead UX Designer · Tokopedia</div>
+          </div>
+        </div>
+        <p class="alumni-quote">"Studio desain di kampus adalah tempat saya menemukan passion dan skill yang kini jadi karier."</p>
+        <div class="alumni-year">ANGKATAN 2016 · S1 DKV</div>
+      </div>
+      <div class="alumni-card">
+        <div class="alumni-header">
+          <div class="alumni-avatar" style="background:linear-gradient(135deg,#533AB7,#9D77DD)">BK</div>
+          <div>
+            <h4>Bagas Kurniawan</h4>
+            <div class="alumni-company">CTO · Startup HealthTech</div>
+          </div>
+        </div>
+        <p class="alumni-quote">"Lab IoT dan mentor industri di iSTTS memberi fondasi kuat untuk membangun startup saya."</p>
+        <div class="alumni-year">ANGKATAN 2013 · S1 Teknik Elektro</div>
+      </div>
+      <div class="alumni-card">
+        <div class="alumni-header">
+          <div class="alumni-avatar" style="background:linear-gradient(135deg,#993556,#D4537E)">NP</div>
+          <div>
+            <h4>Nadya Putri</h4>
+            <div class="alumni-company">Data Scientist · Gojek</div>
+          </div>
+        </div>
+        <p class="alumni-quote">"Pengalaman riset data selama kuliah membuka pintu ke perusahaan teknologi impian saya."</p>
+        <div class="alumni-year">ANGKATAN 2017 · S1 Sistem Informasi</div>
+      </div>
+      <div class="alumni-card">
+        <div class="alumni-header">
+          <div class="alumni-avatar" style="background:linear-gradient(135deg,#BA7517,#EF9F27)">FW</div>
+          <div>
+            <h4>Farhan Wijaya</h4>
+            <div class="alumni-company">Cybersecurity Analyst · BCA</div>
+          </div>
+        </div>
+        <p class="alumni-quote">"Program keamanan siber iSTTS sangat relevan dengan ancaman digital yang saya hadapi sehari-hari."</p>
+        <div class="alumni-year">ANGKATAN 2018 · S1 Informatika</div>
+      </div>
+      <div class="alumni-card">
+        <div class="alumni-header">
+          <div class="alumni-avatar" style="background:linear-gradient(135deg,#3B6D11,#639922)">LS</div>
+          <div>
+            <h4>Lisa Santoso</h4>
+            <div class="alumni-company">Product Designer · Traveloka</div>
+          </div>
+        </div>
+        <p class="alumni-quote">"iSTTS mengajarkan saya berpikir seperti desainer sekaligus engineer — kombinasi yang sangat berharga."</p>
+        <div class="alumni-year">ANGKATAN 2016 · S1 Desain Produk</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="alumni-logos reveal">
+      <p>Alumni kami berkarier di</p>
+      <span class="alumni-logo-item">Google</span>
+      <span class="alumni-logo-item">Gojek</span>
+      <span class="alumni-logo-item">Tokopedia</span>
+      <span class="alumni-logo-item">Traveloka</span>
+      <span class="alumni-logo-item">BCA</span>
+      <span class="alumni-logo-item">Telkom</span>
+      <span class="alumni-logo-item">Pertamina</span>
+      <span class="alumni-logo-item">Microsoft</span>
+      <span class="alumni-logo-item">Grab</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container" style="position:relative;z-index:2">
+    <div class="contact-grid reveal">
+      <div>
+        <div class="section-label">Hubungi Kami</div>
+        <h2 class="section-title">Mulai Perjalananmu<br>Bersama iSTTS</h2>
+        <p class="contact-desc">Tertarik mendaftar atau ingin tahu lebih banyak? Tim admisi kami siap membantu Anda menemukan program yang tepat.</p>
+        <div class="contact-info">
+          <div class="contact-item">
+            <span class="contact-item-icon">📍</span>
+            <div class="contact-item-text">
+              <p>Alamat Kampus</p>
+              <strong>Jl. Ngagel Jaya Tengah 73–77, Surabaya 60284</strong>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-item-icon">📞</span>
+            <div class="contact-item-text">
+              <p>Telepon</p>
+              <strong>(031) 502-7920 / +62 821-2290-7788</strong>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-item-icon">✉️</span>
+            <div class="contact-item-text">
+              <p>Email</p>
+              <strong>infopmb@stts.edu</strong>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-item-icon">🌐</span>
+            <div class="contact-item-text">
+              <p>Website Resmi</p>
+              <strong>www.istts.ac.id</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form-card">
+        <h3 style="color:white;font-family:var(--font-display);font-size:1.3rem;margin-bottom:1.5rem">Formulir Pendaftaran Awal</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nama Lengkap</label>
+            <input type="text" placeholder="Masukkan nama Anda">
+          </div>
+          <div class="form-group">
+            <label>Nomor HP</label>
+            <input type="tel" placeholder="08xxxxxxxxxx">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="email@anda.com">
+        </div>
+        <div class="form-group">
+          <label>Program Studi yang Diminati</label>
+          <select>
+            <option value="">— Pilih Program Studi —</option>
+            <option>S1 Teknik Informatika</option>
+            <option>S1 Teknik Elektro</option>
+            <option>S1 Sistem Informasi</option>
+            <option>S1 Cyber Forensics & Information Security</option>
+            <option>S1 Desain Komunikasi Visual</option>
+            <option>S1 Desain Produk</option>
+            <option>S1 Bachelor of Design (Dual Degree)</option>
+            <option>S2 Magister Teknik Informatika</option>
+            <option>D3 Manajemen Informatika</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Pesan / Pertanyaan</label>
+          <textarea placeholder="Tulis pertanyaan Anda di sini..."></textarea>
+        </div>
+        <button class="form-submit" onclick="handleSubmit()">Kirim Pendaftaran →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:.5rem">
+          <div style="width:36px;height:36px;background:linear-gradient(135deg,var(--blue-light),var(--sky));border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:13px;color:white">iS</div>
+          <span style="font-family:var(--font-display);font-weight:700;font-size:16px;color:white">iSTTS</span>
+
+        </div>
+        <p>Institut Sains dan Teknologi Terpadu Surabaya — Academic Excellence in Technology &amp; Design sejak 1979.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Program Studi</h5>
+        <ul>
+          <li><a href="#prodi">Teknik Informatika</a></li>
+          <li><a href="#prodi">Teknik Elektro</a></li>
+          <li><a href="#prodi">Sistem Informasi</a></li>
+          <li><a href="#prodi">Cyber Forensics</a></li>
+          <li><a href="#prodi">Desain Komunikasi Visual</a></li>
+          <li><a href="#prodi">Desain Produk</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Kampus</h5>
+        <ul>
+          <li><a href="#about">Tentang iSTTS</a></li>
+          <li><a href="#dosen">Tenaga Pengajar</a></li>
+          <li><a href="#fasilitas">Fasilitas</a></li>
+          <li><a href="#project">Riset &amp; Proyek</a></li>
+          <li><a href="#alumni">Alumni</a></li>
+          <li><a href="#contact">Kontak</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Informasi</h5>
+        <ul>
+          <li><a href="#">Pendaftaran Mahasiswa</a></li>
+          <li><a href="#">Beasiswa</a></li>
+          <li><a href="#">Kalender Akademik</a></li>
+          <li><a href="#">Kerjasama Industri</a></li>
+          <li><a href="#">Office of International Affairs</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Institut Sains dan Teknologi Terpadu Surabaya. Hak cipta dilindungi.</span>
+      <span>Jl. Ngagel Jaya Tengah 73–77, Surabaya · (031) 502-7920</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 60);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+
+  function filterProdi(cat, btn) {
+    document.querySelectorAll('.prodi-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.prodi-card').forEach(card => {
+      if (cat === 'all' || card.dataset.fakultas === cat) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    nav.style.background = window.scrollY > 40
+      ? 'rgba(10,22,40,0.98)'
+      : 'rgba(10,22,40,0.94)';
+  });
+  function handleSubmit() {
+    const btn = document.querySelector('.form-submit');
+    btn.textContent = '✓ Terima kasih! Tim kami akan menghubungi Anda.';
+    btn.style.background = '#1D9E75';
+    setTimeout(() => {
+      btn.textContent = 'Kirim Pendaftaran →';
+      btn.style.background = '';
+    }, 4000);
+  }
+</script>
+</body>
+</html>
